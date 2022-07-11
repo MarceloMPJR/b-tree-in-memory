@@ -87,7 +87,7 @@ func TestTraverse(t *testing.T) {
 }
 
 func TestSearch(t *testing.T) {
-	tree := NewBTree(250)
+	tree := NewBTree(3)
 
 	tree.Insert(10, 1)
 	tree.Insert(20, 2)

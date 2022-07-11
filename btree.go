@@ -66,22 +66,25 @@ func (b *BTree) Insert(key, record int) {
 	b.Root.insertNonFull(key, record)
 }
 
-// minimum degree: 85 | size: 4088 bytes | total: 4096
 type BTreeNode struct {
 	Offset        int
 	KeyCount      int
 	MinimumDegree int
 	Leaf          bool
 
-	Keys     [169]int
-	Records  [169]int
-	Children [170]*BTreeNode
+	Keys     []int
+	Records  []int
+	Children []*BTreeNode
 }
 
 // BTreeNode initializer
 func NewBTreeNode(MinimumDegree int, Leaf bool) *BTreeNode {
 	newNode := &BTreeNode{KeyCount: 0, Leaf: Leaf}
 	newNode.MinimumDegree = MinimumDegree
+
+	newNode.Keys = make([]int, 2*MinimumDegree-1)
+	newNode.Records = make([]int, 2*MinimumDegree-1)
+	newNode.Children = make([]*BTreeNode, 2*MinimumDegree)
 
 	return newNode
 }
